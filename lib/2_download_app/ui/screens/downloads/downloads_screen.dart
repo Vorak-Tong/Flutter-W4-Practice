@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../providers/theme_color_provider.dart';
 import '../../theme/theme.dart';
 import 'widgets/download_controler.dart';
-
+import 'widgets/download_tile.dart';
 
 class DownloadsScreen extends StatelessWidget {
   // Create the list of fake ressources
@@ -39,6 +39,14 @@ class DownloadsScreen extends StatelessWidget {
           SizedBox(height: 50),
 
           // TODO - Add the Download tiles
+          Expanded(
+            child: ListView.builder(
+              itemCount: controllers.length,
+              itemBuilder: (context, index){
+                return DownloadTile(controller: controllers[index]);
+              },
+            )
+          )
         ],
       ),
     );
