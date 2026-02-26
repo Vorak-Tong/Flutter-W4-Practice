@@ -23,32 +23,37 @@ class DownloadsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: currentThemeColor.backgroundColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 16),
-          Text(
-            "Downloads",
-            style: AppTextStyles.heading.copyWith(
-              color: currentThemeColor.color,
-            ),
+    return ListenableBuilder(
+      listenable: themeColorService,
+      builder: (context, child) {
+        return Container(
+          color: currentThemeColor.backgroundColor,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 16),
+              Text(
+                "Downloads",
+                style: AppTextStyles.heading.copyWith(
+                  color: currentThemeColor.color,
+                ),
+              ),
+
+              SizedBox(height: 50),
+
+              // TODO - Add the Download tiles
+              Expanded(
+                child: ListView.builder(
+                  itemCount: controllers.length,
+                  itemBuilder: (context, index) {
+                    return DownloadTile(controller: controllers[index]);
+                  },
+                ),
+              ),
+            ],
           ),
-
-          SizedBox(height: 50),
-
-          // TODO - Add the Download tiles
-          Expanded(
-            child: ListView.builder(
-              itemCount: controllers.length,
-              itemBuilder: (context, index){
-                return DownloadTile(controller: controllers[index]);
-              },
-            )
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 }
